@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معاذ | مطور واجهات أمامية</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<body>
+<div class="mouse-light"></div>
+<div class="parallax-bg"></div>
+  <div id="loader">
+  <div class="spinner"></div>
+</div>
+
+<!-- فقاعات -->
+<div class="bubbles">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- الهيدر -->
+<header>
+  <nav class="navbar">
+    <div class="logo-glass">MOAAZ</div>
+    <ul class="nav-links">
+      <li><a href="#about">من أنا</a></li>
+      <li><a href="#services">خدماتي</a></li>
+      <li><a href="#contact">تواصل معنا</a></li>
+    </ul>
+    <button id="toggleMode" class="btn">🌙</button>
+  </nav>
+</header>
+
+<!-- هيرو -->
+<section class="hero" id="hero">
+  <div class="hero-content" data-aos="zoom-in">
+    <h1>مرحباً، أنا <span class="highlight">معاذ</span></h1>
+   <p><span id="typewriter"></span></p>
+    <a href="#contact" class="btn">تواصل معي</a>
+  </div>
+</section>
+
+<!-- من أنا -->
+<section id="about" data-aos="fade-up">
+  <div class="container">
+    <h2>من أنا</h2>
+    <p>أنا معاذ، مطور واجهات أمامية أستخدم HTML وCSS وJavaScript وC++ لصناعة مواقع عصرية وسريعة.</p>
+  </div>
+</section>
+
+<!-- خدماتي -->
+<section id="services" data-aos="fade-up">
+  <div class="container">
+    <h2>خدماتي</h2>
+    <div class="service-list">
+      <div class="service" data-aos="zoom-in" data-aos-delay="100">
+        <h3>تصميم مواقع</h3>
+        <p>تصميم واجهات عصرية متجاوبة باستخدام HTML وCSS وJavaScript.</p>
+      </div>
+      <div class="service" data-aos="zoom-in" data-aos-delay="200">
+        <h3>برمجة C++</h3>
+        <p>تطوير برامج سطح المكتب أو مشاريع باستخدام لغة C++ بكفاءة.</p>
+      </div>
+      <div class="service" data-aos="zoom-in" data-aos-delay="300">
+        <h3>تحسين تجربة المستخدم</h3>
+        <p>تحليل وتطوير تجربة المستخدم لزيادة سرعة الموقع وتحسين الأداء.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- تواصل -->
+<section id="contact" data-aos="fade-up">
+  <div class="container">
+    <h2>تواصل معنا</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="الاسم" required />
+      <input type="email" placeholder="البريد الإلكتروني" required />
+      <textarea placeholder="رسالتك" rows="5" required></textarea>
+      <button type="submit" class="btn">إرسال</button>
+    </form>
+  </div>
+</section>
+
+<!-- زر الرجوع للأعلى -->
+<button id="scrollToTopBtn" title="أعلى">↑</button>
+
+<!-- سكربتات -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000 });
+
+  const scrollBtn = document.getElementById("scrollToTopBtn");
+  window.onscroll = () => {
+    scrollBtn.style.display = (window.scrollY > 200) ? "block" : "none";
+  };
+  scrollBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // تبديل الوضع الليلي
+  const toggleMode = document.getElementById("toggleMode");
+  const bubbles = document.querySelector('.bubbles');
+  toggleMode.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    toggleMode.textContent = document.body.classList.contains("dark-mode") ? "🌞" : "🌙";
+    bubbles.style.display = document.body.classList.contains("dark-mode") ? "none" : "block";
+  });
+  window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  loader.style.display = "none";
+});
+const words = ["مطور واجهات أمامية", "مهتم بتجربة المستخدم", "محترف C++ و JavaScript"];
+let i = 0, j = 0, current = "", isDeleting = false;
+
+function type() {
+  const typeElem = document.getElementById("typewriter");
+  if (!typeElem) return;
+
+  if (!isDeleting && j <= words[i].length) {
+    current = words[i].substring(0, j++);
+  } else if (isDeleting && j >= 0) {
+    current = words[i].substring(0, j--);
+  }
+
+  typeElem.innerHTML = current + "|";
+
+  if (!isDeleting && j === words[i].length) {
+    isDeleting = true;
+    setTimeout(type, 1000);
+  } else if (isDeleting && j === 0) {
+    isDeleting = false;
+    i = (i + 1) % words.length;
+    setTimeout(type, 500);
+  } else {
+    setTimeout(type, isDeleting ? 50 : 100);
+  }
+}
+type();
+  window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  setTimeout(() => {
+    loader.style.opacity = 0;
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 5000);
+  }, 9000); // تأخير 2 ثانية
+});
+document.addEventListener("mousemove", function(e) {
+  const bg = document.querySelector(".parallax-bg");
+  const x = (e.clientX / window.innerWidth - 0.900) * 20;
+  const y = (e.clientY / window.innerHeight - 0.900) * 20;
+  bg.style.transform = `translate(${x}px, ${y}px)`;
+});
+const mouseLight = document.querySelector('.mouse-light');
+  document.addEventListener('mousemove', (e) => {
+    mouseLight.style.top = `${e.clientY}px`;
+    mouseLight.style.left = `${e.clientX}px`;
+  });
+  // إخفاء الضوء عند الخروج من الشاشة
+  document.addEventListener('mouseleave', () => {
+    mouseLight.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    mouseLight.style.opacity = '1';
+  });
+</script>
+<!-- أزرار تواصل سريعة -->
+<div class="social-fixed">
+  <a href="https://wa.me/201156323742" target="_blank" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="mailto:moaazsalah217@gmail.com" title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+<footer style="text-align:center; padding: 20px; color: #aaa; font-size: 14px;">
+  © 2025 معاذ - تصميم وتطوير بواسطة معاذ
+</footer>
+</body>
+</html>
